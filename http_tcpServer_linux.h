@@ -32,6 +32,7 @@ namespace http {
         void closeServer();
 
         void startListen();
+        void acceptConnection(int&);
     };
 }
 

@@ -59,4 +59,19 @@ namespace http {
            << " ***\n\n";
         log(ss.str(), LOG_FILE);
     }
+
+    void TcpServer::acceptConnection(int& new_socket) {
+        new_socket = accept(m_socket, (sockaddr*) &m_socketAddress.sin_addr, &m_socketAddress_len);
+
+        if (new_socket < 0)
+        {
+            std::ostringstream ss;
+            ss << 
+            "Server failed to accept incoming connection from ADDRESS: " 
+            << inet_ntoa(m_socketAddress.sin_addr) << "; PORT: " 
+            << ntohs(m_socketAddress.sin_port);
+            exitWithError(ss.str());
+        }
+
+    }
 }
